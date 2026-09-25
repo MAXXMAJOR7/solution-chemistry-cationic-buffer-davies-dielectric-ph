@@ -1,0 +1,730 @@
+{
+  "schema": {
+    "input": {
+      "value_a": "float [0.0005, 0.1]",
+      "value_b": "float [0.0005, 0.1]",
+      "value_c": "float [0, 0.2]",
+      "value_d": "float [0, 50]"
+    },
+    "output": {
+      "output": "float, 4 decimals"
+    }
+  },
+  "seed": 48,
+  "cases": [
+    {
+      "id": "edge_control_1",
+      "category": "control",
+      "label": "25 degC, dilute equimolar, no salt: thermal twist neutral, activity term small (pH ~ pK + 0.01)",
+      "input": {
+        "value_a": 0.001,
+        "value_b": 0.001,
+        "value_c": 0.0,
+        "value_d": 25.0
+      },
+      "expected": {
+        "output": 7.7769
+      }
+    },
+    {
+      "id": "edge_control_2",
+      "category": "control",
+      "label": "25 degC, 1:10 buffer, no salt: thermal twist neutral, near textbook pK + 1",
+      "input": {
+        "value_a": 0.002,
+        "value_b": 0.02,
+        "value_c": 0.0,
+        "value_d": 25.0
+      },
+      "expected": {
+        "output": 8.782
+      }
+    },
+    {
+      "id": "edge_control_3",
+      "category": "control",
+      "label": "Same as control_1 at 0.0005 M: activity term vanishes further, output approaches pK(25 degC) = 7.7619",
+      "input": {
+        "value_a": 0.0005,
+        "value_b": 0.0005,
+        "value_c": 0.0,
+        "value_d": 25.0
+      },
+      "expected": {
+        "output": 7.772
+      }
+    },
+    {
+      "id": "edge_discrim_1",
+      "category": "discriminating",
+      "label": "25 degC, 0.2 M NaCl: charge-type activity twist RAISES pH by ~0.13 over ideal (acetate-type intuition predicts a ~0.13 fall)",
+      "input": {
+        "value_a": 0.01,
+        "value_b": 0.01,
+        "value_c": 0.2,
+        "value_d": 25.0
+      },
+      "expected": {
+        "output": 7.8904
+      }
+    },
+    {
+      "id": "edge_discrim_2",
+      "category": "discriminating",
+      "label": "0 degC, dilute: thermal twist alone lifts pH by ~0.53",
+      "input": {
+        "value_a": 0.001,
+        "value_b": 0.001,
+        "value_c": 0.0,
+        "value_d": 0.0
+      },
+      "expected": {
+        "output": 8.3025
+      }
+    },
+    {
+      "id": "edge_discrim_3",
+      "category": "discriminating",
+      "label": "50 degC, dilute: thermal twist alone lowers pH by ~0.46",
+      "input": {
+        "value_a": 0.001,
+        "value_b": 0.001,
+        "value_c": 0.0,
+        "value_d": 50.0
+      },
+      "expected": {
+        "output": 7.3151
+      }
+    },
+    {
+      "id": "edge_discrim_4",
+      "category": "discriminating",
+      "label": "50 degC, high salt: A(T) from eps_r(T) enlarges the salt effect vs discrim_1",
+      "input": {
+        "value_a": 0.01,
+        "value_b": 0.01,
+        "value_c": 0.2,
+        "value_d": 50.0
+      },
+      "expected": {
+        "output": 7.4346
+      }
+    },
+    {
+      "id": "edge_discrim_5",
+      "category": "discriminating",
+      "label": "0 degC, high salt: both twists fire, smaller A(T)",
+      "input": {
+        "value_a": 0.01,
+        "value_b": 0.01,
+        "value_c": 0.2,
+        "value_d": 0.0
+      },
+      "expected": {
+        "output": 8.4113
+      }
+    },
+    {
+      "id": "edge_boundary_1",
+      "category": "boundary",
+      "label": "Corner: 200:1 base excess at 0 degC -> pH > 10.5, [OH-] consumes ~8% of BH+ (full charge balance needed)",
+      "input": {
+        "value_a": 0.0005,
+        "value_b": 0.1,
+        "value_c": 0.0,
+        "value_d": 0.0
+      },
+      "expected": {
+        "output": 10.5639
+      }
+    },
+    {
+      "id": "edge_boundary_2",
+      "category": "boundary",
+      "label": "Corner: 200:1 acid excess at 50 degC -> lowest pH ~5.1, free h (~8e-6 M) no longer negligible",
+      "input": {
+        "value_a": 0.1,
+        "value_b": 0.0005,
+        "value_c": 0.0,
+        "value_d": 50.0
+      },
+      "expected": {
+        "output": 5.1202
+      }
+    },
+    {
+      "id": "edge_boundary_3",
+      "category": "boundary",
+      "label": "Corner: maximum ionic strength (I = 0.3), equimolar 0.1 M, 50 degC: largest activity shift (~0.14)",
+      "input": {
+        "value_a": 0.1,
+        "value_b": 0.1,
+        "value_c": 0.2,
+        "value_d": 50.0
+      },
+      "expected": {
+        "output": 7.4416
+      }
+    },
+    {
+      "id": "rand_00",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.009126,
+        "value_b": 0.001006,
+        "value_c": 0.1423,
+        "value_d": 15.11
+      },
+      "expected": {
+        "output": 7.1218
+      }
+    },
+    {
+      "id": "rand_01",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.072125,
+        "value_b": 0.001388,
+        "value_c": 0.1524,
+        "value_d": 8.28
+      },
+      "expected": {
+        "output": 6.5165
+      }
+    },
+    {
+      "id": "rand_02",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.083554,
+        "value_b": 0.051188,
+        "value_c": 0.0215,
+        "value_d": 32.47
+      },
+      "expected": {
+        "output": 7.5157
+      }
+    },
+    {
+      "id": "rand_03",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.001587,
+        "value_b": 0.007519,
+        "value_c": 0.1701,
+        "value_d": 7.75
+      },
+      "expected": {
+        "output": 8.9118
+      }
+    },
+    {
+      "id": "rand_04",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.00158,
+        "value_b": 0.000737,
+        "value_c": 0.0127,
+        "value_d": 24.94
+      },
+      "expected": {
+        "output": 7.4841
+      }
+    },
+    {
+      "id": "rand_05",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.001186,
+        "value_b": 0.00099,
+        "value_c": 0.1396,
+        "value_d": 14.59
+      },
+      "expected": {
+        "output": 8.0092
+      }
+    },
+    {
+      "id": "rand_06",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.003015,
+        "value_b": 0.002993,
+        "value_c": 0.1683,
+        "value_d": 13.6
+      },
+      "expected": {
+        "output": 8.1106
+      }
+    },
+    {
+      "id": "rand_07",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.015494,
+        "value_b": 0.071158,
+        "value_c": 0.1142,
+        "value_d": 14.15
+      },
+      "expected": {
+        "output": 8.7568
+      }
+    },
+    {
+      "id": "rand_08",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.00104,
+        "value_b": 0.015888,
+        "value_c": 0.0351,
+        "value_d": 20.09
+      },
+      "expected": {
+        "output": 9.1145
+      }
+    },
+    {
+      "id": "rand_09",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.03756,
+        "value_b": 0.031592,
+        "value_c": 0.0555,
+        "value_d": 18.32
+      },
+      "expected": {
+        "output": 7.9245
+      }
+    },
+    {
+      "id": "rand_10",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.002312,
+        "value_b": 0.002341,
+        "value_c": 0.0994,
+        "value_d": 5.82
+      },
+      "expected": {
+        "output": 8.2688
+      }
+    },
+    {
+      "id": "rand_11",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.00092,
+        "value_b": 0.001089,
+        "value_c": 0.066,
+        "value_d": 26.75
+      },
+      "expected": {
+        "output": 7.8951
+      }
+    },
+    {
+      "id": "rand_12",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.002714,
+        "value_b": 0.00489,
+        "value_c": 0.1548,
+        "value_d": 39.08
+      },
+      "expected": {
+        "output": 7.8743
+      }
+    },
+    {
+      "id": "rand_13",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.004685,
+        "value_b": 0.054787,
+        "value_c": 0.0002,
+        "value_d": 29.11
+      },
+      "expected": {
+        "output": 8.782
+      }
+    },
+    {
+      "id": "rand_14",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.018713,
+        "value_b": 0.004285,
+        "value_c": 0.0856,
+        "value_d": 12.94
+      },
+      "expected": {
+        "output": 7.4731
+      }
+    },
+    {
+      "id": "rand_15",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.028971,
+        "value_b": 0.001388,
+        "value_c": 0.1129,
+        "value_d": 35.77
+      },
+      "expected": {
+        "output": 6.3571
+      }
+    },
+    {
+      "id": "rand_16",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.040376,
+        "value_b": 0.068286,
+        "value_c": 0.0329,
+        "value_d": 7.76
+      },
+      "expected": {
+        "output": 8.4399
+      }
+    },
+    {
+      "id": "rand_17",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.002171,
+        "value_b": 0.039932,
+        "value_c": 0.1162,
+        "value_d": 36.65
+      },
+      "expected": {
+        "output": 8.9143
+      }
+    },
+    {
+      "id": "rand_18",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.005005,
+        "value_b": 0.008192,
+        "value_c": 0.1958,
+        "value_d": 19.59
+      },
+      "expected": {
+        "output": 8.2099
+      }
+    },
+    {
+      "id": "rand_19",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.004868,
+        "value_b": 0.016121,
+        "value_c": 0.1728,
+        "value_d": 45.17
+      },
+      "expected": {
+        "output": 8.0335
+      }
+    },
+    {
+      "id": "rand_20",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.008267,
+        "value_b": 0.000623,
+        "value_c": 0.0189,
+        "value_d": 1.38
+      },
+      "expected": {
+        "output": 7.1997
+      }
+    },
+    {
+      "id": "rand_21",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.000508,
+        "value_b": 0.01507,
+        "value_c": 0.0735,
+        "value_d": 4.55
+      },
+      "expected": {
+        "output": 9.743
+      }
+    },
+    {
+      "id": "rand_22",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.036071,
+        "value_b": 0.012067,
+        "value_c": 0.102,
+        "value_d": 42.03
+      },
+      "expected": {
+        "output": 7.0868
+      }
+    },
+    {
+      "id": "rand_23",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.000834,
+        "value_b": 0.005439,
+        "value_c": 0.1169,
+        "value_d": 24.14
+      },
+      "expected": {
+        "output": 8.702
+      }
+    },
+    {
+      "id": "rand_24",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.001577,
+        "value_b": 0.030798,
+        "value_c": 0.1715,
+        "value_d": 49.75
+      },
+      "expected": {
+        "output": 8.714
+      }
+    },
+    {
+      "id": "rand_25",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.012238,
+        "value_b": 0.001426,
+        "value_c": 0.0485,
+        "value_d": 1.6
+      },
+      "expected": {
+        "output": 7.4068
+      }
+    },
+    {
+      "id": "rand_26",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.092236,
+        "value_b": 0.004767,
+        "value_c": 0.0544,
+        "value_d": 1.0
+      },
+      "expected": {
+        "output": 7.0934
+      }
+    },
+    {
+      "id": "rand_27",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.002643,
+        "value_b": 0.086851,
+        "value_c": 0.1332,
+        "value_d": 4.31
+      },
+      "expected": {
+        "output": 9.8191
+      }
+    },
+    {
+      "id": "rand_28",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.001698,
+        "value_b": 0.072425,
+        "value_c": 0.0637,
+        "value_d": 38.43
+      },
+      "expected": {
+        "output": 9.2192
+      }
+    },
+    {
+      "id": "rand_29",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.015792,
+        "value_b": 0.000724,
+        "value_c": 0.1746,
+        "value_d": 42.07
+      },
+      "expected": {
+        "output": 6.2325
+      }
+    },
+    {
+      "id": "rand_30",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.068325,
+        "value_b": 0.000876,
+        "value_c": 0.0475,
+        "value_d": 16.09
+      },
+      "expected": {
+        "output": 6.16
+      }
+    },
+    {
+      "id": "rand_31",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.038538,
+        "value_b": 0.009991,
+        "value_c": 0.1935,
+        "value_d": 38.84
+      },
+      "expected": {
+        "output": 7.0471
+      }
+    },
+    {
+      "id": "rand_32",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.000735,
+        "value_b": 0.011439,
+        "value_c": 0.0174,
+        "value_d": 41.06
+      },
+      "expected": {
+        "output": 8.6993
+      }
+    },
+    {
+      "id": "rand_33",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.00053,
+        "value_b": 0.002183,
+        "value_c": 0.1234,
+        "value_d": 41.51
+      },
+      "expected": {
+        "output": 8.1767
+      }
+    },
+    {
+      "id": "rand_34",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.000957,
+        "value_b": 0.039655,
+        "value_c": 0.0192,
+        "value_d": 18.96
+      },
+      "expected": {
+        "output": 9.5481
+      }
+    },
+    {
+      "id": "rand_35",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.029979,
+        "value_b": 0.005577,
+        "value_c": 0.1355,
+        "value_d": 23.36
+      },
+      "expected": {
+        "output": 7.1861
+      }
+    },
+    {
+      "id": "rand_36",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.01654,
+        "value_b": 0.033038,
+        "value_c": 0.096,
+        "value_d": 9.45
+      },
+      "expected": {
+        "output": 8.4893
+      }
+    },
+    {
+      "id": "rand_37",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.000541,
+        "value_b": 0.005636,
+        "value_c": 0.0441,
+        "value_d": 15.51
+      },
+      "expected": {
+        "output": 9.0465
+      }
+    },
+    {
+      "id": "rand_38",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.001433,
+        "value_b": 0.001329,
+        "value_c": 0.1962,
+        "value_d": 16.79
+      },
+      "expected": {
+        "output": 8.019
+      }
+    },
+    {
+      "id": "rand_39",
+      "category": "random",
+      "label": "log-uniform value_a, value_b sample",
+      "input": {
+        "value_a": 0.063756,
+        "value_b": 0.00061,
+        "value_c": 0.1069,
+        "value_d": 44.46
+      },
+      "expected": {
+        "output": 5.5093
+      }
+    }
+  ]
+}
